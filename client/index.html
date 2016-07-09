@@ -23,8 +23,15 @@
 
             var socket = io();
 
+            socket.on('update', function (data) {
+                console.log(data);
+            });
+
+
             gyro.frequency = 500;
             gyro.startTracking(function(o) {
+
+                //calculate colors
                 var colors = {
                     x: (o.x/9.8)*255,
                     y: (o.y/9.8)*255,
@@ -43,13 +50,17 @@
                 colors.y = Math.floor(colors.y);
                 colors.z = Math.floor(colors.z);
 
+                //update document
                 document.getElementById("text").innerHTML = colors.x+", "+colors.y+" ,"+colors.z;
-                //document.body.style.backgroundColor = "rgb("+colors.x+","+colors.y+","+colors.z+")";
                 rect.fill = "rgb("+colors.x+","+colors.y+","+colors.z+")";
                 rect.noStroke();
                 two.update();
 
-                socket.emit('gyro', colors);
+                socket.emit('gyro', {
+                    x: o.x,
+                    y: o.y,
+                    z: o.z
+                });
             });
         </script>
     </body>
