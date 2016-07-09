@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="gyro.min.js"></script>
+        <script src="two.js"></script>
+
+
+    </head>
+    <body>
+        <div id=""></div>
+        
+        <div id="draw-shapes"></div>
+
+        <script type="text/javascript">
+            // Make an instance of two and place it on the page.
+            var elem = document.getElementById('draw-shapes');
+            var params = { width: 285, height: 200 };
+            var two = new Two(params).appendTo(elem);
+
+            // two has convenience methods to create shapes.
+            var circle = two.makeCircle(72, 100, 50);
+            gyro.startTracking(function(o) {
+                // o.x, o.y, o.z for accelerometer
+                // o.alpha, o.beta, o.gamma for gyro
+                console.log(o.x, o.y, o.z);
+            });
+        </script>
+    </body>
+</html>
