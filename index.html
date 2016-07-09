@@ -35,7 +35,17 @@
                     z: (o.z/9.8)*255
                 };
 
+                if(colors.x > 255) colors.x = 255;
+                if(colors.y > 255) colors.y = 255;
+                if(colors.z > 255) colors.z = 255;
+
+                if(colors.x < 0) colors.x = 0;
+                if(colors.y < 0) colors.y = 0;
+                if(colors.z < 0) colors.z = 0;
+
+                document.getElementById("text").innerHTML = color.x+", "+color.y+" ,"+color.z;
                 document.body.style.backgroundColor = "rgb("+colors.x+","+colors.y+","+colors.z+")";
+                //document.body.style.backgroundColor = "rgb(255,55,2)";
             });
         </script>
     </body>
