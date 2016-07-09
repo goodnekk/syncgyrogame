@@ -16,16 +16,16 @@
         <script type="text/javascript">
 
         // Make an instance of two and place it on the page.
-        var elem = document.getElementById('draw-shapes');
-        var params = { width: 285, height: 200 };
-        var two = new Two(params).appendTo(elem);
+            var elem = document.getElementById('draw-shapes');
+            var params = { width: 800, height: 800 };
+            var two = new Two(params).appendTo(elem);
 
-        // two has convenience methods to create shapes.
-        var rect = two.makeRectangle(213, 100, 100, 100);
-
-
+            // two has convenience methods to create shapes.
+            var rect = two.makeRectangle(0, 0, 800, 800);
 
 
+
+            gyro.frequency = 500;
             gyro.startTracking(function(o) {
                 // o.x, o.y, o.z for accelerometer
                 // o.alpha, o.beta, o.gamma for gyro
