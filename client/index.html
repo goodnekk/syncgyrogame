@@ -5,6 +5,7 @@
         <title></title>
         <script src="gyro.min.js"></script>
         <script src="two.js"></script>
+        <script src="webaudio.js"></script>
         <script src="/socket.io/socket.io.js"></script>
 
     </head>
@@ -14,11 +15,17 @@
 
         <script type="text/javascript">
 
+
+            // init the library
+            var webaudio = new WebAudio();
+            // create a sound
+            var sound = webaudio.createSound().load();
+
             //audio files
-            var ping_sound = new Audio('sounds/Ting_Mimick.wav');
-            var leader_sound = new Audio('sounds/Leader_Mimick.wav');
-            var countdown_sound = new Audio('sounds/Countdown_Mimick.wav');
-            var wrong_sound = new Audio('sounds/Wrong_Mimick.wav');
+            var ping_sound = webaudio.createSound().load('sounds/Ting_Mimick.wav');
+            var leader_sound = webaudio.createSound().load('sounds/Leader_Mimick.wav');
+            var countdown_sound = webaudio.createSound().load('sounds/Countdown_Mimick.wav');
+            var wrong_sound = webaudio.createSound().load('sounds/Wrong_Mimick.wav');
 
             var synced = false;
 
