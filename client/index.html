@@ -5,8 +5,9 @@
         <title></title>
         <script src="gyro.min.js"></script>
         <script src="two.js"></script>
-        <script src="webaudio.js"></script>
         <script src="/socket.io/socket.io.js"></script>
+
+        <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script></head>
 
     </head>
     <body>
@@ -14,18 +15,14 @@
         <div id="draw-shapes"></div>
 
         <script type="text/javascript">
-
-
-            // init the library
-            var webaudio = new WebAudio();
-            // create a sound
-            var sound = webaudio.createSound().load();
-
+            console.log(createjs.Sound);
             //audio files
-            var ping_sound = webaudio.createSound().load('sounds/Ting_Mimick.wav');
-            var leader_sound = webaudio.createSound().load('sounds/Leader_Mimick.wav');
-            var countdown_sound = webaudio.createSound().load('sounds/Countdown_Mimick.wav');
-            var wrong_sound = webaudio.createSound().load('sounds/Wrong_Mimick.wav');
+            createjs.Sound.registerSound("sounds/Ting_Mimick.wav", "ping_sound");
+            createjs.Sound.registerSound("sounds/Leader_Mimick.wav", "leader_sound");
+            createjs.Sound.registerSound("sounds/Countdown_Mimick.wav", "countdown_sound");
+            createjs.Sound.registerSound("sounds/Wrong_Mimick.wav", "wrong_sound");
+
+
 
             var synced = false;
 
@@ -60,28 +57,37 @@
             socket.on('go', function () {
                 rect.fill = "#00FF00";
                 two.update();
-
-                ping_sound.play();
-                countdown_sound.play();
+                createjs.Sound.play("ping_sound");
+                createjs.Sound.play("countdown_sound");
+                //ping_sound.play();
+                //countdown_sound.play();
             });
 
             socket.on('leader', function () {
                 rect.fill = "#0000FF";
                 two.update();
 
-                leader_sound.play();
+                //leader_sound.play();
+                createjs.Sound.play("leader_sound");
+            });
+
+            socket.on('follower', function () {
+                rect.fill = "#000000";
+                two.update();
             });
 
             socket.on('great', function () {
                 rect.fill = "#00FF00";
                 two.update();
-                ping_sound.play();
+                createjs.Sound.play("ping_sound");
+                //ping_sound.play();
             });
 
             socket.on('fail', function () {
                 rect.fill = "#FF0000";
                 two.update();
-                wrong_sound.play();
+                createjs.Sound.play("wrong_sound");
+                //wrong_sound.play();
             });
 
             gyro.frequency = 500;

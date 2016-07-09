@@ -93,6 +93,7 @@ setInterval(function(){
 
         leader = players[keys[Math.floor(Math.random()*keys.length)]];
         leader.socket.emit("leader");
+        leader.socket.broadcast.emit("follower");
     }
 
     //
