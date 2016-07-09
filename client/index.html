@@ -10,14 +10,19 @@
     </head>
     <body>
         <div id="text"></div>
-
         <div id="draw-shapes"></div>
 
         <script type="text/javascript">
 
+            //audio files
+            var ping_sound = new Audio('sounds/Ting_Mimick.wav');
+            var leader_sound = new Audio('sounds/Leader_Mimick.wav');
+            var countdown_sound = new Audio('sounds/Countdown_Mimick.wav');
+            var wrong_sound = new Audio('sounds/Wrong_Mimick.wav');
+
             var synced = false;
 
-        // Make an instance of two and place it on the page.
+            // Make an instance of two and place it on the page.
             var elem = document.getElementById('draw-shapes');
             var params = { width: 800, height: 800 };
             var two = new Two(params).appendTo(elem);
@@ -25,22 +30,48 @@
 
             rect.fill = "#FF0000";
             rect.noStroke();
+            two.update();
 
             var socket = io();
 
+            document.addEventListener("mousedown", function(e){
+                socket.emit('ready', true);
+            }, false);
+
+            document.addEventListener("mouseup", function(e){
+                socket.emit('ready', false);
+            }, false);
+
             socket.on('update', function (data) {
-                synced = data;
 
-                if(synced){
-                    //rect.fill = "rgb("+colors.x+","+colors.y+","+colors.z+")";
-                    rect.fill = "#00FF00";
-                } else {
-                    rect.fill = "#FF0000";
-                }
-
-                two.update();
             });
 
+            socket.on('go', function () {
+                rect.fill = "#00FF00";
+                two.update();
+
+                ping_sound.play();
+                countdown_sound.play();
+            });
+
+            socket.on('leader', function () {
+                rect.fill = "#0000FF";
+                two.update();
+
+                leader_sound.play();
+            });
+
+            socket.on('great', function () {
+                rect.fill = "#00FF00";
+                two.update();
+                ping_sound.play();
+            });
+
+            socket.on('fail', function () {
+                rect.fill = "#FF0000";
+                two.update();
+                wrong_sound.play();
+            });
 
             gyro.frequency = 500;
             gyro.startTracking(function(o) {
