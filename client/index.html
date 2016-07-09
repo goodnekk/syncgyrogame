@@ -34,13 +34,13 @@
 
             var socket = io();
 
-            document.addEventListener("mousedown", function(e){
+            document.addEventListener("touchstart", function(e){
                 socket.emit('ready', true);
                 rect.fill = "#0000FF";
                 two.update();
             }, false);
 
-            document.addEventListener("mouseup", function(e){
+            document.addEventListener("touchend", function(e){
                 socket.emit('ready', false);
                 rect.fill = "#FF0000";
                 two.update();
