@@ -36,10 +36,12 @@
 
             document.addEventListener("mousedown", function(e){
                 socket.emit('ready', true);
+                rect.fill = "#00FF00";
             }, false);
 
             document.addEventListener("mouseup", function(e){
                 socket.emit('ready', false);
+                rect.fill = "#FF0000";
             }, false);
 
             socket.on('update', function (data) {
