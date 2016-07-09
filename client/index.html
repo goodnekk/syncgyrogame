@@ -5,7 +5,7 @@
         <title></title>
         <script src="gyro.min.js"></script>
         <script src="two.js"></script>
-
+        <script src="/socket.io/socket.io.js"></script>
 
     </head>
     <body>
@@ -19,19 +19,12 @@
             var elem = document.getElementById('draw-shapes');
             var params = { width: 800, height: 800 };
             var two = new Two(params).appendTo(elem);
-
-            // two has convenience methods to create shapes.
             var rect = two.makeRectangle(0, 0, 800, 800);
 
-
+            var socket = io();
 
             gyro.frequency = 500;
             gyro.startTracking(function(o) {
-                // o.x, o.y, o.z for accelerometer
-                // o.alpha, o.beta, o.gamma for gyro
-                //console.log(o.x, o.y, o.z);
-                //document.getElementById("text").innerHTML = o.x+", "+o.y+" ,"+o.z;
-                //document.getElementById("text").innerHTML ="asdfdsf";
                 var colors = {
                     x: (o.x/9.8)*255,
                     y: (o.y/9.8)*255,
@@ -55,6 +48,8 @@
                 rect.fill = "rgb("+colors.x+","+colors.y+","+colors.z+")";
                 rect.noStroke();
                 two.update();
+
+                socket.emit('gyro', colors);
             });
         </script>
     </body>
