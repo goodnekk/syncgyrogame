@@ -14,15 +14,18 @@
         <div id="draw-shapes"></div>
 
         <script type="text/javascript">
-/*
-            // Make an instance of two and place it on the page.
-            var elem = document.getElementById('draw-shapes');
-            var params = { width: 285, height: 200 };
-            var two = new Two(params).appendTo(elem);
 
-            // two has convenience methods to create shapes.
-            var circle = two.makeCircle(72, 100, 50);
-*/
+        // Make an instance of two and place it on the page.
+        var elem = document.getElementById('draw-shapes');
+        var params = { width: 285, height: 200 };
+        var two = new Two(params).appendTo(elem);
+
+        // two has convenience methods to create shapes.
+        var rect = two.makeRectangle(213, 100, 100, 100);
+
+
+
+
             gyro.startTracking(function(o) {
                 // o.x, o.y, o.z for accelerometer
                 // o.alpha, o.beta, o.gamma for gyro
@@ -49,7 +52,9 @@
 
                 document.getElementById("text").innerHTML = colors.x+", "+colors.y+" ,"+colors.z;
                 //document.body.style.backgroundColor = "rgb("+colors.x+","+colors.y+","+colors.z+")";
-                document.body.style.backgroundColor = "rgb(25.234,55,2)";
+                rect.fill = "rgb("+colors.x+","+colors.y+","+colors.z+")";
+                rect.noStroke();
+                two.update();
             });
         </script>
     </body>
