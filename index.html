@@ -43,9 +43,13 @@
                 if(colors.y < 0) colors.y = 0;
                 if(colors.z < 0) colors.z = 0;
 
+                colors.x = Math.floor(colors.x);
+                colors.y = Math.floor(colors.y);
+                colors.z = Math.floor(colors.z);
+
                 document.getElementById("text").innerHTML = colors.x+", "+colors.y+" ,"+colors.z;
-                document.body.style.backgroundColor = "rgb("+colors.x+","+colors.y+","+colors.z+")";
-                //document.body.style.backgroundColor = "rgb(255,55,2)";
+                //document.body.style.backgroundColor = "rgb("+colors.x+","+colors.y+","+colors.z+")";
+                document.body.style.backgroundColor = "rgb(25.234,55,2)";
             });
         </script>
     </body>
