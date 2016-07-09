@@ -47,5 +47,5 @@ setInterval(function(){
     }
     console.log(players);
     console.log(synced);
-    io.emit('update', players);
+    io.emit('update', synced);
 }, 500);

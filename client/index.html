@@ -15,16 +15,30 @@
 
         <script type="text/javascript">
 
+            var synced = false;
+
         // Make an instance of two and place it on the page.
             var elem = document.getElementById('draw-shapes');
             var params = { width: 800, height: 800 };
             var two = new Two(params).appendTo(elem);
             var rect = two.makeRectangle(0, 0, 800, 800);
 
+            rect.fill = "#FF0000";
+            rect.noStroke();
+
             var socket = io();
 
             socket.on('update', function (data) {
-                console.log(data);
+                synced = data;
+
+                if(synced){
+                    //rect.fill = "rgb("+colors.x+","+colors.y+","+colors.z+")";
+                    rect.fill = "#00FF00";
+                } else {
+                    rect.fill = "#FF0000";
+                }
+
+                two.update();
             });
 
 
@@ -52,9 +66,6 @@
 
                 //update document
                 document.getElementById("text").innerHTML = colors.x+", "+colors.y+" ,"+colors.z;
-                rect.fill = "rgb("+colors.x+","+colors.y+","+colors.z+")";
-                rect.noStroke();
-                two.update();
 
                 socket.emit('gyro', {
                     x: o.x,
