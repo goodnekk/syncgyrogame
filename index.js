@@ -34,12 +34,12 @@ setInterval(function(){
             leader = players[i];
         } else { //compare
             if(
-                players[i].x > leader.x-10 &&
-                players[i].y > leader.y-10 &&
-                players[i].y > leader.y-10 &&
-                players[i].x < leader.x+10 &&
-                players[i].y < leader.y+10 &&
-                players[i].y < leader.y+10
+                players[i].x > leader.x-1 &&
+                players[i].y > leader.y-1 &&
+                players[i].y > leader.y-1 &&
+                players[i].x < leader.x+1 &&
+                players[i].y < leader.y+1 &&
+                players[i].y < leader.y+1
             ) {
                 synced = true;
             }
